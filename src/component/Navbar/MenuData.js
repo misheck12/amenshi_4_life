@@ -32,7 +32,7 @@ export const MenuData = [
 {
     title: 'Call-Us',
     url: '#',
-    cName: 'nav-links',
+    cName: 'nav-links-mobile',
     icon : 'fa-solid fa-phone'
 },
 ]
