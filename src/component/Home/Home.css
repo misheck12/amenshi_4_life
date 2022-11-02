@@ -1,6 +1,37 @@
+:root{
+    --primary-color: rgb(236,247,236) linear-gradient(90deg, rgba(236,247,236,1) 84%, rgba(245,250,249,1) 100%);
+}
 .Home{
     width: 100%;
     height: 100vh;
-    background: rgb(236,247,236);
-background: linear-gradient(90deg, rgba(236,247,236,1) 84%, rgba(245,250,249,1) 100%);
+    background: var(--primary-color);
+}
+
+.Home-container{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(./img/home3.png);
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+
+}
+
+.Home-header{
+    position: absolute;
+    left: 30px;
+}
+
+.Home-header h1{
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #000;
+    padding: 0 100px;
+    margin-right: 650px;
+    text-transform: uppercase;
+    justify-content: left;
+    gap: 10px;
 }
