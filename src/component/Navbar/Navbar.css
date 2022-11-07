@@ -1,5 +1,5 @@
 .NavbarItems {
-  display: flex;
+display: flex;
 justify-content: space-between;
 align-items: center;
 font-size: 1.2rem;
@@ -8,26 +8,26 @@ box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 width: 95%;
 height: 80px;
 border-radius: 13px;
-position: fixed;
+position: absolute;
 top:20px;
 left: 50%;
 transform: translate(-50%);
 }
 
 .logo {
-  color: rgba(33, 82, 28, 0.808);
+color: green;
 font-size: 2rem;
 font-weight: bold;
 text-decoration: none;
 }
 
 .fa-faucet-drip {
-  color: lightgreen;
+  color: green;
   margin-left: 01.2rem;
 }
 
 .nav-menu {
-  display: grid;
+display: grid;
 grid-template-columns: repeat(6, auto);
 grid-gap: 10px;
 align-items: center;
@@ -37,7 +37,7 @@ justify-content: end;
 }
 
 .nav-links {
-  color: rgba(33, 82, 28, 0.808);
+color: rgba(33, 82, 28, 0.808);
 text-decoration: none;
 padding: 0.5rem 1rem;
 white-space: nowrap;
@@ -48,7 +48,9 @@ white-space: nowrap;
 }
 
 .nav-links:hover {
-  color: lightgreen;
+  background-color: green;
+  color: whitesmoke;
+  border-radius: 6px;
 }
 
 .fa-bars,
