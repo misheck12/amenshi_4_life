@@ -5,7 +5,7 @@ import "./img/home3.png";
 const Home = () => {
   return (
 	<>
-	<div className='Home'>
+	<div className='Home pt-8'>
 		<div className='Home-container'>
 			<div className='Home-header'>
 			<h1>
@@ -25,17 +25,15 @@ const Home = () => {
 			<h2><i class="fa-solid fa-hand-holding-droplet"></i>60 communities benefiting</h2>
 		</div>
 
-		<div class="flex flex-row ">
+		<div class="px-6 py-12 flex flex-row ">
           <div class='w-1/2 h-12 md-10'>
-			<img src={require('./img/back.jpg')} alt="home3" />
-		  </div>
-          <div class="grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
-          <div class="px-6 py-12 md:px-12">
+			      <img src={require('./img/back.jpg')} alt="home3" />
+		      </div>
+          <div class="w-1/2 w-full lg:w-6/12 xl:w-8/12">
+          <div class="px-6 md:px-12">
             <h2 class="text-2xl font-bold mb-4">This is us</h2>
-            <p class="uppercase text-red-600 font-bold mb-6 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-4 h-4 mr-2">
-                <path fill="currentColor" />
-                </svg>What's the secret of the great taste?
+            <p class="uppercase text-red-600 text-3xl font-bold mb-4">
+              What's the secret of the great taste?
             </p>
             <p class="text-gray-500 mb-6 Abousec">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum maxime voluptas

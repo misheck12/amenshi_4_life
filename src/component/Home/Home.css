@@ -51,7 +51,7 @@
     margin-bottom: 20px;
 }
 
-p{
+.Home-header p{
     font-size: 1.0rem;
     font-weight: 500;
     color: #000;
@@ -133,9 +133,4 @@ p{
 
 .text-gray-500 {
     display: contents;
-}
-
-.text-red-600{
-    margin: auto;
-    padding: 20px;
 }
