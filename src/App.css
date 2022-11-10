@@ -1,6 +1,18 @@
-*{
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
+  height:1000px;
+  display: flex;
+  flex-direction: column;
+  }
+  .Footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  padding: 10px;
+
+  }
+  

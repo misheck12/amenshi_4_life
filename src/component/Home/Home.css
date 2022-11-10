@@ -51,7 +51,7 @@
     margin-bottom: 20px;
 }
 
-p{
+.Home p{
     font-size: 1.0rem;
     font-weight: 500;
     color: #000;
@@ -131,11 +131,33 @@ p{
     height: 500px;
 }
 
-.text-gray-500 {
-    display: contents;
+.Home-btn {
+    font-size: 1.0rem;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: green;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    margin-left: 40px;
+    margin: 0 auto;
+    cursor: pointer;   
 }
 
-.text-red-600{
-    margin: auto;
-    padding: 20px;
+.Home-btn:hover{
+    background-color: #fff;
+    color: green;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid green;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 100px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
 }

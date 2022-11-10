@@ -1,31 +1,31 @@
 export const MenuData = [ 
     {
     title: 'Home',
-    url: '#',
+    url: '/',
     cName: 'nav-links',
     icon : 'fa-solid fa-house-user'
 },
 {
     title: 'About',
-    url: '#',
+    url: '/about',
     cName: 'nav-links',
     icon : 'fa-solid fa-circle-info'
 },
 {
-    title: 'Services',
-    url: '#',
+    title: 'Ministries',
+    url: '/Services',
     cName: 'nav-links',
     icon : 'fa-solid fa-briefcase'
 },
 {
     title: 'projects',
-    url: '#',
+    url: '/projects',
     cName: 'nav-links',
     icon : 'fa-solid fa-project-diagram'
 },
 {
     title: 'Contact',
-    url: '#',
+    url: '/contact',
     cName: 'nav-links',
     icon : 'fa-solid fa-envelope'
 },
