@@ -51,11 +51,7 @@
     margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
 .Home p{
-=======
-.Home-header p{
->>>>>>> 93477fd5f52c07e9349beef888087a56540e673c
     font-size: 1.0rem;
     font-weight: 500;
     color: #000;
@@ -148,7 +144,6 @@
     margin: 0 auto;
     cursor: pointer;   
 }
-<<<<<<< HEAD
 
 .Home-btn:hover{
     background-color: #fff;
@@ -166,5 +161,3 @@
     background-color: var(--primary-color);
     border-radius: 4px;
 }
-=======
->>>>>>> 93477fd5f52c07e9349beef888087a56540e673c

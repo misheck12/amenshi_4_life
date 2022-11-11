@@ -26,7 +26,6 @@ const Home = () => {
 			<h2><i className="fa-solid fa-hand-holding-droplet"></i>60 communities benefiting</h2>
 		</div>
 
-<<<<<<< HEAD
 		<div className="flex flex-row ">
           <div className='w-1/2 h-12 md-10 pt-11'>
 			<img src={require('./img/back.jpg')} alt="home3" />
@@ -35,16 +34,6 @@ const Home = () => {
           <div className='px-6 py-12 md:px-12'>
             <h2 className="text-1xl text-center mb-4">This is us</h2>
             <p className="uppercase text-3xl text-green-600 font-bold mb-6 flex items-center">
-=======
-		<div class="px-6 py-12 flex flex-row ">
-          <div class='w-1/2 h-12 md-10'>
-			      <img src={require('./img/back.jpg')} alt="home3" />
-		      </div>
-          <div class="w-1/2 w-full lg:w-6/12 xl:w-8/12">
-          <div class="px-6 md:px-12">
-            <h2 class="text-2xl font-bold mb-4">This is us</h2>
-            <p class="uppercase text-red-600 text-3xl font-bold mb-4">
->>>>>>> 93477fd5f52c07e9349beef888087a56540e673c
               What's the secret of the great taste?
             </p>
             <p className="text-gray-500 mb-6 Abousec">
