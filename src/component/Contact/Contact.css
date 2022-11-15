@@ -1,11 +1,118 @@
-.contact{
-    background-color: #f5f5f5;
-    padding: 50px 0;
-    text-align: center;
-    padding-top: 200px;
-    padding: 0 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+:root{
+    --primary-color: #f5faf9;
+    --secondary-color: #fff;
+    --boxes-background-color: #e8f1ec;
 }
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 100px;
+    list-style: none;
+    padding-top: 150px;
+    background: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.contact__header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 100px;
+}
+
+.contact__header-title{
+    font-size: 1.9rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.contact__header--text{
+    font-size: 1.0rem;
+    font-weight: 500;
+    color: #000;
+    justify-content: left;
+    align-content: space-between;
+    margin-bottom: 60px;
+    padding-top: 30px;
+}
+.contact__body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 60px;
+}
+.contact__content_right{
+   margin-right: 50px;
+   align-items: center;
+   padding: 50px 100px;
+}
+
+.contact__content_right p{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: green;
+    justify-content: left;
+    align-content: space-between;
+    padding-bottom: 30px;  
+}
+
+.contact__content_right ul li {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #000;
+    margin: 8px 0;
+}
+
+.contact__form__field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 100px;
+    padding-top: 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+}
+
+.contact__form__input{
+    padding: 10px 50px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    font-size: 14px;
+}
+
+.contact__form__label{
+    font-size: 1.0rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.contact__form__message{
+    padding: 30px 50px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    outline: none;
+    font-size: 14px;
+}
+.contact__form__button{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    outline: none;
+    font-size: 14px;
+    background-color: green;
+    color: #fff;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.contact__form__button:hover{
+    background-color: white;
+    color: green;
+    border-color: green;
+}
+    
