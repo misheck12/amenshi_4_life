@@ -8,6 +8,7 @@ import Services from "./component/Services/Services";
 import About from "./component/About/About";
 import Projects from "./component/Projects/Projects";
 import Contact from './component/Contact/Contact';
+import Gallery from './component/Gallery/Gallery';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
 				<Route exact path="/about" element={<About />} />
 				<Route exact path="/projects" element={<Projects />} />
 				<Route exact path="/contact" element={<Contact />} />
+				<Route exact path="/gallery" element={<Gallery />} />
 			</Routes>
 		</Router>
 		<Footer />
