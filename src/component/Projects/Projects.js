@@ -90,9 +90,7 @@ const projects = () => {
 <div class=" youtube-video embed-responsive embed-responsive-21by9 relative w-full overflow-hidden pt-25">
     <h3>Below is our Video report</h3>
 <iframe width="1080" height="500" src="https://www.youtube.com/embed/GQ5MIaiJf0A" title="YouTube video player" frameborder="yes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-        
+</div>        
        </>
     );
 }
