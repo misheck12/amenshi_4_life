@@ -50,9 +50,9 @@ const Home = () => {
               optio iste quis placeat alias amet rerum sint quos dolor pariatur inventore
               possimus ad consequuntur fugiat perferendis consectetur laudantium.
             </p>
-
-            <button className='Home-btn mt-20px'>Donate Now</button>
-
+          <a href="https://github.com/" >
+          <button className='Home-btn mt-20px' blank>Donate Now</button>
+          </a>
           </div>
         </div>
       </div>
