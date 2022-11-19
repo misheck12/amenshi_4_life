@@ -78,7 +78,7 @@
 }
 
 .contact__form__input{
-    padding: 10px 50px;
+    padding: 6px;
     border-radius: 8px;
     border: 1px solid gray;
     font-size: 14px;
@@ -92,7 +92,7 @@
 }
 
 .contact__form__message{
-    padding: 30px 50px;
+    padding: 8px;
     border-radius: 8px;
     border: 1px solid gray;
     outline: none;
