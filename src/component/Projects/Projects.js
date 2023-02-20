@@ -19,45 +19,32 @@ const projects = () => {
                 <div className="drill">
                         <h2>Drilling</h2>
                         <ul>
-                     <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
+                        <li>Kansusuwa Community school</li>
                     </ul>        
                     </div>
                     <div className="repair pt-10">
                         <h2>Repairs</h2>
                         <ul>
-                     <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
+                     <li>Kamatipa</li>
+                        <li>Garnetone</li>
                     </ul>        
                         </div>
                 </div>
 
                 <div className="progress">
-                    <h1>Working on</h1>
+                    <h1>In progress</h1>
                 <div className="drill">
                         <h2>Drilling</h2>
                     <ul>
-                     <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
+                     <li>Fundraising for new well</li>
+                     <li>Researching new communities to impact</li>
                     </ul>                    
                     </div>
                     <div className="repair pt-10">
                         <h2>Repairs</h2>
                         <ul>
-                     <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
+                        <li>Applying for CDF to repair Wells</li>
+                        <li>Data collection for all repaired wells</li>
                     </ul>        
                     </div>
                 </div>
@@ -67,21 +54,21 @@ const projects = () => {
                     <div className="drill">
                         <h2>Drilling</h2>
                         <ul>
-                     <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
+                     <li>Kamatipa</li>
+                        <li>New kitwe</li>
+                        <li>Bread of life</li>
+                        <li>Kalulushi</li>
+                        <li>Somone Home</li>
                     </ul>        
                     </div>
                     <div className="repair pt-10">
                         <h2>Repairs</h2>
                         <ul>
-                     <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
-                        <li>Drilling</li>
+                     <li>Musonda</li>
+                        <li>New kitwe</li>
+                        <li>Maposa</li>
+                        <li>Kalulushi PHC</li>
+                        <li>chambishi PHC</li>
                     </ul>        
                     </div>
                 </div>
