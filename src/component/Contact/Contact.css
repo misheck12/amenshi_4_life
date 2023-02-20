@@ -115,4 +115,48 @@
     color: green;
     border-color: green;
 }
+
+
+@media screen and (max-width: 960px) {
+
+    .contact{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0 20px;
+        list-style: none;
+        padding-top: 150px;
+        margin-bottom: 30px;
+    }
+
+    .contact__body{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .contact__header{
+        padding: 0 50px;
+        
+    }
+
+    .contact__content_right,
+    .contact__content_left{
+        width: 100%;
+        padding: 0 50px;
+        margin: 0 auto;
     
+    }
+
+    .contact__form__button{
+        margin-bottom: 80px;
+    }
+    
+    .contact__form__button:hover{
+        background-color: white;
+        color: green;
+        border-color: green;
+    }
+
+  }
+  
