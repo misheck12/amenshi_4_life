@@ -139,6 +139,10 @@
         padding: 0 50px;
         
     }
+    .contact__form__field{
+        padding: 20px;
+        margin: 0 auto;
+    }
 
     .contact__content_right,
     .contact__content_left{
