@@ -17,7 +17,7 @@ const Contact = () => {
                     </p>
 
                     <ul>
-                        <li><i className="fa fa-check-circle"></i> <span>Address:</span> 107 Central Street Nkana East, Kitwe, Zambia</li>
+                        <li><i className="fa fa-check-circle"></i> <span>Address:</span> 12 mporokoso, Kitwe, Zambia</li>
                         <li><i className="fa fa-check-circle"></i> <span>Email:</span>water4lifezambia@gmail.com</li>
                         <li><i className="fa fa-check-circle"></i> <span>Phone:</span> +1 123 456 7890</li>
                         <li><i className="fa fa-check-circle"></i> <span>Postal Code:</span> 123456</li>
