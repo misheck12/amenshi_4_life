@@ -30,7 +30,7 @@
     background-image: url(./img/home3.png);
     background-size: 100% 120%;
     background-repeat: no-repeat;
-    margin-top: 100px;
+    margin-top: 4%;
 
 }
 
@@ -162,4 +162,32 @@
     border-radius: 4px;
 }
 
-@media
+@media only screen and (max-width: 960px){
+    .Home{
+        width: 100%;
+        padding-top: 30px;
+    }
+
+    .Home-header{
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Home-header h1{
+        width: 100%;
+        padding-top: 20px;
+        margin: 0 auto;
+    }
+
+    .Home-header p{
+        width: 100%;
+        padding-top: 30px;
+        margin: 0 auto;
+    }
+
+    .Home-header-btn{
+        width: 30%;
+    }
+}
