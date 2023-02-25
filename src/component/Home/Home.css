@@ -236,6 +236,10 @@
         margin:10px 2px;
     }
 
+    .Home-header-btn:hover{
+        padding: 10px;
+    }
+
     .Home-container{
         width: 100%;
         display: flex;
