@@ -25,7 +25,8 @@ const Home = () => {
 			<h2><i className="fa-solid fa-hand-holding-droplet"></i>30 Boreholes repaired</h2>
 			<h2><i className="fa-solid fa-hand-holding-droplet"></i>60 communities benefiting</h2>
 		</div>
-
+    
+    <div className='homes'>
 		<div className="flex flex-row ">
           <div className='w-1/2 h-12 md-10 pt-11'>
 			<img src={require('./img/back.jpg')} alt="home3" />
@@ -54,6 +55,7 @@ const Home = () => {
           </a>
           </div>
         </div>
+      </div>
       </div>
       <div className='grow-0 shrink-0 basis-auto w-full bg-#f5faf9'>
           <div className='px-6 py-12 md:px-12'>
