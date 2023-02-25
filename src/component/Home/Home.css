@@ -157,9 +157,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 0 100px;
     background-color: var(--primary-color);
     border-radius: 4px;
+    padding: 40px;
 }
 
 @media (max-width: 959px){
