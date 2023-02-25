@@ -13,7 +13,9 @@ const Home = () => {
 				<q>Thousands have lived without love, not one without water.</q>H. Auden
 			</h1>
 			<p>We are a non-profit ministry serving needs for clean water and care for abandoned babies in Zambia, Africa.</p>
-			<button className='Home-header-btn'>Donate Now</button>
+			<a href="https://app.clovergive.com/App/Giving/talm10e206" >
+          <button className='Home-header-btn' blank>Donate Now</button>
+          </a>
 			</div>
 		</div>
 
