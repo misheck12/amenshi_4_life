@@ -162,7 +162,7 @@
     border-radius: 4px;
 }
 
-@media only screen and (max-width: 960px){
+@media (max-width: 959px){
     .Home{
         width: 100%;
         padding-top: 30px;
@@ -179,15 +179,78 @@
         width: 100%;
         padding-top: 20px;
         margin: 0 auto;
+        font-size: 1.5rem;
     }
 
     .Home-header p{
         width: 100%;
-        padding-top: 30px;
         margin: 0 auto;
+        font-size: smaller;
     }
 
     .Home-header-btn{
         width: 30%;
     }
+
+    .Home-container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 30%;
+        margin-top: 200px;
+        padding: 0;
+    }
+
+    .flex-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px){
+    .Home{
+        height: 60Vh;
+    }
+
+    .Home-header{
+        border-radius: #000 2px;
+        margin-left: -28px;
+        padding: 12px;
+    }
+    
+    .Home-header h1 {
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+      }
+
+    .Home-header p {
+        width: 100%;
+        margin: 0 auto;
+        font-size: smaller;
+        padding: 0;
+      }
+
+    .Home-header-btn{
+        width: 137px;
+        margin:10px 2px;
+    }
+
+    .Home-container{
+        width: 100%;
+        display: flex;
+    }
+
+    .flex-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flex-container > h2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 4px;
+        border: 1px black;
+}
 }
