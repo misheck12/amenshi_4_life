@@ -1,0 +1,9 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#e0f2fe"/>
+  <text x="50%" y="45%" font-family="Arial" font-size="28" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">
+    Mission Photo
+  </text>
+  <text x="50%" y="55%" font-family="Arial" font-size="14" fill="#666" text-anchor="middle" dominant-baseline="middle">
+    Add mission/impact photo
+  </text>
+</svg>

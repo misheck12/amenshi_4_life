@@ -1,0 +1,10 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#dbeafe"/>
+  <circle cx="400" cy="250" r="80" fill="#16a34a" opacity="0.3"/>
+  <text x="50%" y="55%" font-family="Arial" font-size="28" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">
+    Water Wells Ministry
+  </text>
+  <text x="50%" y="65%" font-family="Arial" font-size="14" fill="#666" text-anchor="middle" dominant-baseline="middle">
+    Replace with drilling/well photo
+  </text>
+</svg>
