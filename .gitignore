@@ -25,6 +25,10 @@ lerna-debug.log*
 .pm2/
 server/logs/
 
+# Docker
+.dockerignore
+docker-compose.override.yml
+
 # OS files
 .DS_Store
 .DS_Store?

@@ -1,0 +1,167 @@
+name: Docker CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:  # Manual trigger
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME_SERVER: ${{ github.repository }}/server
+  IMAGE_NAME_CLIENT: ${{ github.repository }}/client
+
+jobs:
+  # ==================== BUILD DOCKER IMAGES ====================
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        service: [server, client]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.service }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./${{ matrix.service }}
+          file: ./${{ matrix.service }}/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ==================== DEPLOY TO VM ====================
+  deploy:
+    name: Deploy with Docker Compose
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: ${{ secrets.VM_SSH_PORT || 22 }}
+          script_stop: true
+          script: |
+            echo "🚀 Starting Docker deployment..."
+
+            # Navigate to project directory
+            cd ${{ secrets.VM_PROJECT_PATH }}
+
+            # Pull latest code
+            echo "📥 Pulling latest code..."
+            git pull origin main
+
+            # Login to GitHub Container Registry
+            echo "🔐 Logging into container registry..."
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # Pull latest images
+            echo "📦 Pulling Docker images..."
+            docker-compose pull
+
+            # Stop and remove old containers
+            echo "🛑 Stopping old containers..."
+            docker-compose down
+
+            # Start new containers
+            echo "🚀 Starting new containers..."
+            docker-compose up -d
+
+            # Clean up old images
+            echo "🧹 Cleaning up..."
+            docker image prune -f
+
+            # Show running containers
+            echo "✅ Deployment complete! Running containers:"
+            docker-compose ps
+
+      - name: Wait for Services
+        run: sleep 15
+
+  # ==================== HEALTH CHECK ====================
+  health-check:
+    name: Post-Deployment Health Check
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Check Server Health
+        run: |
+          echo "Checking server health..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.API_URL }}/health || echo "000")
+          if [ "$response" == "200" ]; then
+            echo "✅ Server is healthy (HTTP $response)"
+          else
+            echo "⚠️ Server health check returned HTTP $response"
+            exit 1
+          fi
+
+      - name: Check Client Health
+        run: |
+          echo "Checking client health..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.FRONTEND_URL }} || echo "000")
+          if [ "$response" == "200" ]; then
+            echo "✅ Client is accessible (HTTP $response)"
+          else
+            echo "⚠️ Client check returned HTTP $response"
+            exit 1
+          fi
+
+      - name: Check Docker Containers
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: ${{ secrets.VM_SSH_PORT || 22 }}
+          script: |
+            cd ${{ secrets.VM_PROJECT_PATH }}
+            echo "📊 Container Status:"
+            docker-compose ps
+            
+            echo ""
+            echo "🔍 Container Health:"
+            docker ps --filter "name=amenshi4life" --format "table {{.Names}}\t{{.Status}}"

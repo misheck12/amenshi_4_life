@@ -1,0 +1,88 @@
+# Production Docker Compose - Custom Ports for Multiple Sites
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: amenshi4life-server
+    restart: always
+    ports:
+      - "5001:5000"  # External port 5001, internal 5000
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server/uploads:/app/uploads
+      - amenshi-logs:/app/logs
+    networks:
+      - amenshi-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: amenshi4life-client
+    restart: always
+    ports:
+      - "8001:80"  # External port 8001, internal 80
+    depends_on:
+      - server
+    networks:
+      - amenshi-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Nginx Reverse Proxy (optional - for custom domain routing)
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: amenshi4life-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-proxy.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - client
+      - server
+    networks:
+      - amenshi-network
+    profiles:
+      - with-proxy  # Only run with: docker-compose --profile with-proxy up
+
+networks:
+  amenshi-network:
+    driver: bridge
+
+volumes:
+  amenshi-logs:
+    driver: local
