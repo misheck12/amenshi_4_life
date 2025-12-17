@@ -192,6 +192,15 @@ sudo ufw allow OpenSSH
 sudo ufw allow 'Nginx Full'
 print_success "Firewall configured"
 
+# Step 10.5: Install Certbot for Let's Encrypt SSL
+print_step "Installing Certbot for SSL certificates..."
+if ! command -v certbot &> /dev/null; then
+    sudo apt install -y certbot python3-certbot-nginx
+    print_success "Certbot installed"
+else
+    print_success "Certbot already installed"
+fi
+
 # Step 11: Setup GitHub SSH key
 print_step "Setting up SSH for GitHub Actions..."
 mkdir -p ~/.ssh
@@ -252,8 +261,18 @@ echo "   pm2 save"
 echo ""
 echo "4. Configure GitHub Actions secrets in your repository"
 echo ""
-echo "5. Setup SSL certificate (recommended):"
-echo "   sudo apt install certbot python3-certbot-nginx"
-echo "   sudo certbot --nginx -d $DOMAIN"
+echo "5. Setup SSL certificate:"
+if [ "$DOMAIN" != "localhost" ]; then
+    echo "   sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN"
+    echo ""
+    echo "   To setup SSL now, run:"
+    echo "   sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN --non-interactive --agree-tos --email your-email@example.com"
+else
+    echo "   (Skipped for localhost - configure a domain first)"
+fi
+echo ""
+echo "6. Setup automatic SSL renewal:"
+echo "   sudo certbot renew --dry-run"
+echo "   (Certbot auto-renewal is configured via systemd timer)"
 echo ""
 print_success "All done! 🎉"

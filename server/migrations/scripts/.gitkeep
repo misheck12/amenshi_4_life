@@ -1,0 +1,42 @@
+# Migration Scripts Directory
+
+Place your migration files here with the naming convention:
+`YYYYMMDD_HHMMSS_description.js`
+
+Example: `20241216_120000_add_youtube_field.js`
+
+## Migration File Template
+
+```javascript
+/**
+ * Migration: Add YouTube URL field to projects
+ * Date: 2024-12-16
+ */
+
+module.exports = {
+  async up(mongoose) {
+    // Your migration logic here
+    const Project = mongoose.model('Project');
+    
+    // Example: Add new field to all documents
+    await Project.updateMany(
+      { youtubeUrl: { $exists: false } },
+      { $set: { youtubeUrl: '' } }
+    );
+    
+    console.log('✅ Added youtubeUrl field to all projects');
+  },
+  
+  async down(mongoose) {
+    // Rollback logic (optional)
+    const Project = mongoose.model('Project');
+    
+    await Project.updateMany(
+      {},
+      { $unset: { youtubeUrl: '' } }
+    );
+    
+    console.log('✅ Removed youtubeUrl field from all projects');
+  }
+};
+```
