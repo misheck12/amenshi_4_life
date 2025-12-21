@@ -40,7 +40,7 @@ const Home = () => {
             {/* Hero Section */}
             <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-primary to-white">
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-10"
+                    className="absolute inset-0 bg-cover bg-center opacity-40"
                     style={{ backgroundImage: homeContent?.heroImage ? `url(${homeContent.heroImage})` : "url('/images/hero-bg.jpg')" }}
                 ></div>
 
@@ -80,23 +80,37 @@ const Home = () => {
                             <Spinner size="lg" />
                         </div>
                     ) : stats ? (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="bg-primary p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                                <i className="fa-solid fa-hand-holding-droplet text-accent text-4xl mb-4"></i>
-                                <h3 className="text-3xl font-bold text-gray-900">{formatNumber(stats.boreholeDonated)}</h3>
-                                <p className="text-gray-700">Boreholes Donated</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center transform hover:-translate-y-2 transition-all duration-300">
+                                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+                                    <i className="fa-solid fa-hand-holding-droplet text-blue-600 text-3xl"></i>
+                                </div>
+                                <h3 className="text-4xl font-extrabold text-gray-900 mb-2">{formatNumber(stats.boreholeDonated)}</h3>
+                                <p className="text-gray-600 font-medium uppercase tracking-wide text-sm">Boreholes Donated</p>
                             </div>
 
-                            <div className="bg-primary p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                                <i className="fa-solid fa-hand-holding-droplet text-accent text-4xl mb-4"></i>
-                                <h3 className="text-3xl font-bold text-gray-900">{formatNumber(stats.boreholesRepaired)}</h3>
-                                <p className="text-gray-700">Boreholes Repaired</p>
+                            <div className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center transform hover:-translate-y-2 transition-all duration-300">
+                                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                                    <i className="fa-solid fa-screwdriver-wrench text-green-600 text-3xl"></i>
+                                </div>
+                                <h3 className="text-4xl font-extrabold text-gray-900 mb-2">{formatNumber(stats.boreholesRepaired)}</h3>
+                                <p className="text-gray-600 font-medium uppercase tracking-wide text-sm">Boreholes Repaired</p>
                             </div>
 
-                            <div className="bg-primary p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                                <i className="fa-solid fa-hand-holding-droplet text-accent text-4xl mb-4"></i>
-                                <h3 className="text-3xl font-bold text-gray-900">{formatNumber(stats.communitiesBenefiting)}</h3>
-                                <p className="text-gray-700">Communities Benefiting</p>
+                            <div className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center transform hover:-translate-y-2 transition-all duration-300">
+                                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-6">
+                                    <i className="fa-solid fa-users text-purple-600 text-3xl"></i>
+                                </div>
+                                <h3 className="text-4xl font-extrabold text-gray-900 mb-2">{formatNumber(stats.communitiesBenefiting)}</h3>
+                                <p className="text-gray-600 font-medium uppercase tracking-wide text-sm">Communities Served</p>
+                            </div>
+
+                            <div className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center transform hover:-translate-y-2 transition-all duration-300">
+                                <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-6">
+                                    <i className="fa-solid fa-baby text-pink-500 text-3xl"></i>
+                                </div>
+                                <h3 className="text-4xl font-extrabold text-gray-900 mb-2">{formatNumber(stats.babiesRescued || 0)}</h3>
+                                <p className="text-gray-600 font-medium uppercase tracking-wide text-sm">Babies Rescued</p>
                             </div>
                         </div>
                     ) : null}

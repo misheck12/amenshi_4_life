@@ -112,6 +112,12 @@ export const apiService = {
     update: (data) => api.put('/home-content', data),
   },
 
+  // About Content
+  aboutContent: {
+    get: () => api.get('/about-content'),
+    update: (data) => api.put('/about-content', data),
+  },
+
   // Videos
   videos: {
     getAll: (params) => api.get('/videos', { params }),
@@ -119,6 +125,38 @@ export const apiService = {
     create: (data) => api.post('/videos', data),
     update: (id, data) => api.put(`/videos/${id}`, data),
     delete: (id) => api.delete(`/videos/${id}`),
+  },
+
+  // Settings
+  settings: {
+    get: () => api.get('/settings'),
+    update: (data) => api.put('/settings', data),
+    testEmail: (email) => api.post('/settings/test-email', { email }),
+  },
+
+  // Stories (Blog)
+  stories: {
+    getAll: (params) => api.get('/stories', { params }),
+    getOne: (idOrSlug) => api.get(`/stories/${idOrSlug}`),
+    create: (data) => api.post('/stories', data),
+    update: (id, data) => api.put(`/stories/${id}`, data),
+    delete: (id) => api.delete(`/stories/${id}`),
+  },
+
+  // Subscribers
+  subscribers: {
+    subscribe: (data) => api.post('/subscribers', data),
+    unsubscribe: (data) => api.post('/subscribers/unsubscribe', data),
+    getAll: () => api.get('/subscribers'),
+    broadcast: (data) => api.post('/subscribers/broadcast', data),
+  },
+
+  // Volunteers
+  volunteers: {
+    apply: (data) => api.post('/volunteers', data),
+    getAll: () => api.get('/volunteers'),
+    updateStatus: (id, status) => api.put(`/volunteers/${id}`, { status }),
+    delete: (id) => api.delete(`/volunteers/${id}`),
   },
 };
 

@@ -9,7 +9,12 @@ import {
     FaImages,
     FaCog,
     FaChurch,
+    FaTools,
     FaHome,
+    FaInfoCircle,
+    FaNewspaper,
+    FaPaperPlane,
+    FaHandsHelping,
     FaChevronLeft,
     FaChevronRight
 } from 'react-icons/fa';
@@ -28,6 +33,11 @@ const AdminSidebar = () => {
             title: 'Homepage',
             icon: <FaHome />,
             path: '/admin/home-content',
+        },
+        {
+            title: 'About Page',
+            icon: <FaInfoCircle />,
+            path: '/admin/about-content',
         },
         {
             title: 'Projects',
@@ -64,6 +74,26 @@ const AdminSidebar = () => {
             icon: <FaChartBar />,
             path: '/admin/statistics',
         },
+        {
+            title: 'Settings',
+            icon: <FaTools />,
+            path: '/admin/settings',
+        },
+        {
+            title: 'Stories / Blog',
+            icon: <FaNewspaper />,
+            path: '/admin/stories',
+        },
+        {
+            title: 'Newsletter',
+            icon: <FaPaperPlane />,
+            path: '/admin/newsletter',
+        },
+        {
+            title: 'Volunteers',
+            icon: <FaHandsHelping />,
+            path: '/admin/volunteers',
+        },
     ];
 
     const isActive = (path) => location.pathname === path;
@@ -89,8 +119,8 @@ const AdminSidebar = () => {
                             <Link
                                 to={item.path}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive(item.path)
-                                        ? 'bg-accent text-white'
-                                        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                                    ? 'bg-accent text-white'
+                                    : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                                     }`}
                                 title={collapsed ? item.title : ''}
                             >

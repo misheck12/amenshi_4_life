@@ -14,6 +14,9 @@ const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Stories = lazy(() => import('./pages/Stories'));
+const StoryDetail = lazy(() => import('./pages/StoryDetail'));
+const Volunteer = lazy(() => import('./pages/Volunteer'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Admin pages
@@ -27,6 +30,11 @@ const GalleryManager = lazy(() => import('./pages/admin/GalleryManager'));
 const ServiceManager = lazy(() => import('./pages/admin/ServiceManager'));
 const MinistryManager = lazy(() => import('./pages/admin/MinistryManager'));
 const HomeContentManager = lazy(() => import('./pages/admin/HomeContentManager'));
+const AboutContentManager = lazy(() => import('./pages/admin/AboutContentManager'));
+const Settings = lazy(() => import('./pages/admin/Settings'));
+const StoryManager = lazy(() => import('./pages/admin/StoryManager'));
+const NewsletterManager = lazy(() => import('./pages/admin/NewsletterManager'));
+const VolunteerManager = lazy(() => import('./pages/admin/VolunteerManager'));
 
 // Protected route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -59,8 +67,12 @@ function App() {
                         <Route path="/projects/:id" element={<ProjectDetail />} />
                         <Route path="/gallery" element={<Gallery />} />
                         <Route path="/contact" element={<Contact />} />
+                        <Route path="/stories" element={<Stories />} />
+                        <Route path="/stories/:id" element={<StoryDetail />} />
+                        <Route path="/volunteer" element={<Volunteer />} />
 
                         {/* Admin routes */}
+                        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
                         <Route path="/admin/login" element={<AdminLogin />} />
                         <Route
                             path="/admin/dashboard"
@@ -131,6 +143,46 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <HomeContentManager />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/admin/about-content"
+                            element={
+                                <ProtectedRoute>
+                                    <AboutContentManager />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/admin/settings"
+                            element={
+                                <ProtectedRoute>
+                                    <Settings />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/admin/stories"
+                            element={
+                                <ProtectedRoute>
+                                    <StoryManager />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/admin/newsletter"
+                            element={
+                                <ProtectedRoute>
+                                    <NewsletterManager />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/admin/volunteers"
+                            element={
+                                <ProtectedRoute>
+                                    <VolunteerManager />
                                 </ProtectedRoute>
                             }
                         />

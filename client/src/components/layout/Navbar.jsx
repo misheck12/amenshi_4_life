@@ -9,6 +9,8 @@ const menuItems = [
     { title: 'About', url: '/about', icon: 'fa-solid fa-circle-info' },
     { title: 'Projects', url: '/projects', icon: 'fa-solid fa-diagram-project' },
     { title: 'Gallery', url: '/gallery', icon: 'fa-solid fa-images' },
+    { title: 'Stories', url: '/stories', icon: 'fa-solid fa-newspaper' },
+    { title: 'Volunteer', url: '/volunteer', icon: 'fa-solid fa-hand-holding-heart' },
     { title: 'Contact', url: '/contact', icon: 'fa-solid fa-envelope' },
 ];
 

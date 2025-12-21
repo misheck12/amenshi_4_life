@@ -5,8 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { apiService } from '../services/api';
 import { Spinner } from '../components/common/Spinner';
 import { getCategoryLabel, getStatusColor } from '../utils/helpers';
+import ProjectMap from '../components/common/ProjectMap';
 
 const Projects = () => {
+    const [showMap, setShowMap] = useState(false);
     const [filters, setFilters] = useState({
         status: '',
         category: '',
@@ -28,17 +30,6 @@ const Projects = () => {
 
     const projects = data?.data?.data || [];
 
-    // Debug logs
-    console.log('=== PROJECTS PAGE DEBUG ===');
-    console.log('isLoading:', isLoading);
-    console.log('error:', error);
-    console.log('Full data object:', JSON.stringify(data, null, 2));
-    console.log('data?.data:', data?.data);
-    console.log('data?.data?.data:', data?.data?.data);
-    console.log('projects array:', projects);
-    console.log('projects count:', projects.length);
-    console.log('===========================');
-
     return (
         <>
             <Helmet>
@@ -55,41 +46,59 @@ const Projects = () => {
 
             <section className="py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
-                    {/* Filters */}
-                    <div className="mb-8 grid md:grid-cols-3 gap-4">
-                        <input
-                            type="text"
-                            placeholder="Search projects..."
-                            value={filters.search}
-                            onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-                        />
+                    {/* View Toggle & Filters Header */}
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                        <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+                            <button
+                                onClick={() => setShowMap(false)}
+                                className={`px-4 py-2 rounded-md transition-colors ${!showMap ? 'bg-white shadow text-accent font-medium' : 'text-gray-600 hover:text-gray-900'}`}
+                            >
+                                <i className="fa-solid fa-list mr-2"></i> List View
+                            </button>
+                            <button
+                                onClick={() => setShowMap(true)}
+                                className={`px-4 py-2 rounded-md transition-colors ${showMap ? 'bg-white shadow text-accent font-medium' : 'text-gray-600 hover:text-gray-900'}`}
+                            >
+                                <i className="fa-solid fa-map-location-dot mr-2"></i> Map View
+                            </button>
+                        </div>
 
-                        <select
-                            value={filters.category}
-                            onChange={(e) => setFilters(prev => ({ ...prev, category: e.target.value }))}
-                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-                        >
-                            <option value="">All Categories</option>
-                            <option value="borehole-donation">Borehole Donation</option>
-                            <option value="borehole-repair">Borehole Repair</option>
-                            <option value="education">Education</option>
-                            <option value="babies">Babies</option>
-                        </select>
+                        {/* Filters */}
+                        <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                            <input
+                                type="text"
+                                placeholder="Search projects..."
+                                value={filters.search}
+                                onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                            />
 
-                        <select
-                            value={filters.status}
-                            onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value }))}
-                            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
-                        >
-                            <option value="">All Status</option>
-                            <option value="planned">Planned</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                        </select>
+                            <select
+                                value={filters.category}
+                                onChange={(e) => setFilters(prev => ({ ...prev, category: e.target.value }))}
+                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                            >
+                                <option value="">All Categories</option>
+                                <option value="borehole-donation">Borehole Donation</option>
+                                <option value="borehole-repair">Borehole Repair</option>
+                                <option value="education">Education</option>
+                                <option value="babies">Babies</option>
+                            </select>
+
+                            <select
+                                value={filters.status}
+                                onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value }))}
+                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                            >
+                                <option value="">All Status</option>
+                                <option value="planned">Planned</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
                     </div>
 
-                    {/* Projects Grid */}
+                    {/* Content */}
                     {isLoading ? (
                         <div className="flex justify-center py-12">
                             <Spinner size="lg" />
@@ -97,6 +106,11 @@ const Projects = () => {
                     ) : projects.length === 0 ? (
                         <div className="text-center py-12">
                             <p className="text-gray-600 text-lg">No projects found</p>
+                        </div>
+                    ) : showMap ? (
+                        <div className="mb-8">
+                            <ProjectMap projects={projects} />
+                            <p className="text-center text-sm text-gray-500 mt-2">Showing projects with location data ({projects.filter(p => p.coordinates?.lat).length})</p>
                         </div>
                     ) : (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

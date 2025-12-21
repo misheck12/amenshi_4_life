@@ -1,16 +1,27 @@
 const Contact = require('../models/Contact');
 const nodemailer = require('nodemailer');
 
+const Settings = require('../models/Settings');
+
 // Create email transporter
-const createTransporter = () => {
-  return nodemailer.createTransporter({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
+const createTransporter = async () => {
+  const settings = await Settings.findOne();
+  
+  const host = settings?.smtpHost || process.env.EMAIL_HOST;
+  const port = settings?.smtpPort || process.env.EMAIL_PORT;
+  const user = settings?.smtpUser || process.env.EMAIL_USER;
+  const pass = settings?.smtpPassword || process.env.EMAIL_PASSWORD;
+
+  return {
+    transporter: nodemailer.createTransporter({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass }
+    }),
+    fromEmail: settings?.smtpFromEmail || process.env.EMAIL_FROM,
+    adminEmail: user || process.env.EMAIL_USER
+  };
 };
 
 // @desc    Submit contact form
@@ -29,11 +40,11 @@ exports.submitContact = async (req, res, next) => {
 
     // Send notification email to admin
     try {
-      const transporter = createTransporter();
+      const { transporter, fromEmail, adminEmail } = await createTransporter();
 
       await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
-        to: process.env.EMAIL_USER,
+        from: fromEmail,
+        to: adminEmail,
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <h2>New Contact Message</h2>
@@ -97,10 +108,10 @@ exports.updateMessageStatus = async (req, res, next) => {
     // If replying, send email to user
     if (req.body.reply && req.body.status === 'replied') {
       try {
-        const transporter = createTransporter();
+        const { transporter, fromEmail } = await createTransporter();
 
         await transporter.sendMail({
-          from: process.env.EMAIL_FROM,
+          from: fromEmail,
           to: message.email,
           subject: 'Re: Your message to Amenshi 4 Life',
           html: `

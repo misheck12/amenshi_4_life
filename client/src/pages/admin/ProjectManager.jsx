@@ -27,6 +27,8 @@ const ProjectManager = () => {
         featured: false,
         images: [],
         youtubeUrl: '',
+        lat: '',
+        lng: '',
     });
 
     const { data, isLoading } = useQuery({
@@ -44,10 +46,18 @@ const ProjectManager = () => {
 
     const saveMutation = useMutation({
         mutationFn: (data) => {
+            const payload = {
+                ...data,
+                coordinates: {
+                    lat: data.lat ? parseFloat(data.lat) : undefined,
+                    lng: data.lng ? parseFloat(data.lng) : undefined
+                }
+            };
+
             if (editingProject) {
-                return apiService.projects.update(editingProject._id, data);
+                return apiService.projects.update(editingProject._id, payload);
             }
-            return apiService.projects.create(data);
+            return apiService.projects.create(payload);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['admin-projects']);
@@ -120,6 +130,9 @@ const ProjectManager = () => {
             cost: project.cost || 0,
             featured: project.featured || false,
             images: project.images || [],
+            youtubeUrl: project.youtubeUrl || '',
+            lat: project.coordinates?.lat || '',
+            lng: project.coordinates?.lng || '',
         });
         setShowForm(true);
     };
@@ -223,6 +236,31 @@ const ProjectManager = () => {
                                     onChange={(e) => setFormData({ ...formData, cost: parseInt(e.target.value) || 0 })}
                                     className="w-full px-3 py-2 border rounded-lg"
                                 />
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Latitude</label>
+                                    <input
+                                        type="number"
+                                        step="any"
+                                        value={formData.lat}
+                                        onChange={(e) => setFormData({ ...formData, lat: e.target.value })}
+                                        className="w-full px-3 py-2 border rounded-lg"
+                                        placeholder="-13.1339"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Longitude</label>
+                                    <input
+                                        type="number"
+                                        step="any"
+                                        value={formData.lng}
+                                        onChange={(e) => setFormData({ ...formData, lng: e.target.value })}
+                                        className="w-full px-3 py-2 border rounded-lg"
+                                        placeholder="27.8493"
+                                    />
+                                </div>
                             </div>
                         </div>
 

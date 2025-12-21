@@ -58,6 +58,21 @@ const ProjectDetail = () => {
                                     <i className="fa-solid fa-image text-6xl text-gray-400"></i>
                                 </div>
                             )}
+
+                            {project.videoId && (
+                                <div className="mt-8">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-4">Project Video</h3>
+                                    <div className="aspect-video">
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${project.videoId}`}
+                                            title={project.title}
+                                            className="w-full h-full rounded-lg shadow-lg border-0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <div>

@@ -4,12 +4,29 @@ import { apiService } from '../services/api';
 import { Spinner } from '../components/common/Spinner';
 
 const About = () => {
-    const { data, isLoading } = useQuery({
+    // Fetch team members
+    const { data: teamData, isLoading: teamLoading } = useQuery({
         queryKey: ['team'],
         queryFn: () => apiService.team.getAll(),
     });
 
-    const team = data?.data?.data || [];
+    // Fetch about page content
+    const { data: aboutData, isLoading: aboutLoading } = useQuery({
+        queryKey: ['about-content'],
+        queryFn: () => apiService.aboutContent.get(),
+    });
+
+    const team = teamData?.data?.data || [];
+    const content = aboutData?.data?.data;
+    const isLoading = teamLoading || aboutLoading;
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <Spinner size="lg" />
+            </div>
+        );
+    }
 
     return (
         <>
@@ -21,10 +38,9 @@ const About = () => {
             {/* Hero */}
             <section className="bg-gradient-to-r from-accent to-accent-hover text-white py-20">
                 <div className="max-w-7xl mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{content?.heroTitle || 'About Us'}</h1>
                     <p className="text-xl max-w-3xl mx-auto">
-                        We are part of The <span className="font-bold">Talmudine Foundation</span>: a non-profit ministry
-                        serving needs for clean water and care for abandoned babies in Zambia, Africa.
+                        {content?.heroDescription || 'We are part of The Talmudine Foundation: a non-profit ministry serving needs for clean water and care for abandoned babies in Zambia, Africa.'}
                     </p>
                 </div>
             </section>
@@ -35,48 +51,40 @@ const About = () => {
                     <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
                         <div>
                             <img
-                                src="/images/mission.jpg"
+                                src={content?.mainImage || "/images/mission.jpg"}
                                 alt="Clean water well in Zambia"
-                                className="rounded-lg shadow-xl w-full"
+                                className="rounded-lg shadow-xl w-full h-auto object-cover"
                                 loading="lazy"
                             />
                         </div>
 
                         <div>
                             <h2 className="text-3xl font-bold text-accent mb-6">
-                                8 Years of Experience in Drilling and Maintenance of Water Wells
+                                {content?.mainHeading || '8 Years of Experience in Drilling and Maintenance of Water Wells'}
                             </h2>
 
-                            <p className="text-gray-700 mb-4">
-                                We are called to demonstrate Christ's love in communities by providing clean water.
-                                We believe that access to clean water is a basic human right, and we are committed to
-                                helping communities in need gain access to this vital resource.
+                            <p className="text-gray-700 mb-4 whitespace-pre-wrap">
+                                {content?.paragraph1 || "We are called to demonstrate Christ's love in communities by providing clean water. We believe that access to clean water is a basic human right, and we are committed to helping communities in need gain access to this vital resource."}
                             </p>
 
-                            <p className="text-gray-700">
-                                Water-borne diseases are a major concern in Zambia, where poor sanitary services
-                                and lack of clean water are all too common. We are dedicated to reducing the incidence
-                                of water-borne diseases in the communities we serve.
+                            <p className="text-gray-700 whitespace-pre-wrap">
+                                {content?.paragraph2 || 'Water-borne diseases are a major concern in Zambia, where poor sanitary services and lack of clean water are all too common. We are dedicated to reducing the incidence of water-borne diseases in the communities we serve.'}
                             </p>
                         </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-primary p-8 rounded-lg shadow-lg">
-                            <h3 className="text-2xl font-bold text-accent mb-4">Our Mission</h3>
-                            <p className="text-gray-700">
-                                Our mission is to provide clean water and care for abandoned babies in Zambia, Africa.
-                                The foundation is a partnership between missions-minded believers in the USA and
-                                Gilgal Christian Community Centre in Kitwe, Zambia.
+                            <h3 className="text-2xl font-bold text-accent mb-4">{content?.missionTitle || 'Our Mission'}</h3>
+                            <p className="text-gray-700 whitespace-pre-wrap">
+                                {content?.missionText || 'Our mission is to provide clean water and care for abandoned babies in Zambia, Africa. The foundation is a partnership between missions-minded believers in the USA and Gilgal Christian Community Centre in Kitwe, Zambia.'}
                             </p>
                         </div>
 
                         <div className="bg-primary p-8 rounded-lg shadow-lg">
-                            <h3 className="text-2xl font-bold text-accent mb-4">Our Vision</h3>
-                            <p className="text-gray-700">
-                                Our vision is a future where every community in Zambia has access to clean, safe drinking water
-                                and where every child is cared for with love and dignity. We work towards sustainable solutions
-                                that empower communities for generations to come.
+                            <h3 className="text-2xl font-bold text-accent mb-4">{content?.visionTitle || 'Our Vision'}</h3>
+                            <p className="text-gray-700 whitespace-pre-wrap">
+                                {content?.visionText || 'Our vision is a future where every community in Zambia has access to clean, safe drinking water and where every child is cared for with love and dignity. We work towards sustainable solutions that empower communities for generations to come.'}
                             </p>
                         </div>
                     </div>

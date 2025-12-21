@@ -53,7 +53,12 @@ app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/services', require('./routes/services'));
 app.use('/api/ministries', require('./routes/ministries'));
 app.use('/api/home-content', require('./routes/homeContent'));
+app.use('/api/about-content', require('./routes/aboutContent'));
 app.use('/api/videos', require('./routes/videos'));
+app.use('/api/settings', require('./routes/settings'));
+app.use('/api/stories', require('./routes/stories'));
+app.use('/api/subscribers', require('./routes/subscribers'));
+app.use('/api/volunteers', require('./routes/volunteers'));
 
 // Welcome route
 app.get('/', (req, res) => {
