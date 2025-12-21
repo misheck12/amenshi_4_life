@@ -131,6 +131,10 @@ jobs:
             
             # Stop and remove containers by name explicitely
             docker rm -f amenshi_backend amenshi_frontend || true
+
+            # Kill any process holding ports 3002/3003
+            sudo fuser -k 3002/tcp || true
+            sudo fuser -k 3003/tcp || true
             
             # Clean up any other orphaned containers
             docker ps -a --filter "name=amenshi" --format "{{.ID}}" | xargs -r docker rm -f || true
@@ -175,6 +179,9 @@ jobs:
             # Remove old/duplicate amenshi configs
             sudo rm -f /etc/nginx/sites-enabled/amenshi4life || true
             sudo rm -f /etc/nginx/sites-enabled/amenshi4lifebackend || true
+            
+            # Substitute username in nginx config
+            sed -i "s/deployment_user_placeholder/$USER/g" nginx-system.conf
             
             # Install nginx config
             sudo cp ~/amenshi-app/nginx-system.conf /etc/nginx/sites-available/amenshi4life
