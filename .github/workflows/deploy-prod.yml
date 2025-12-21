@@ -148,7 +148,7 @@ jobs:
             
             # Wait for backend (port 3010)
             for i in {1..30}; do
-              if curl -s -f http://localhost:3010/api/health > /dev/null 2>&1; then
+              if curl -s -f http://localhost:3010/health > /dev/null 2>&1; then
                 echo "✅ Backend is ready!"
                 break
               fi
