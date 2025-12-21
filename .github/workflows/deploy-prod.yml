@@ -146,9 +146,9 @@ jobs:
             # Wait for services to be healthy
             echo "⏳ Waiting for services to be ready..."
             
-            # Wait for backend
+            # Wait for backend (port 3010)
             for i in {1..30}; do
-              if curl -s -f http://localhost:3002/api/health > /dev/null 2>&1; then
+              if curl -s -f http://localhost:3010/api/health > /dev/null 2>&1; then
                 echo "✅ Backend is ready!"
                 break
               fi
@@ -160,9 +160,9 @@ jobs:
               sleep 3
             done
             
-            # Wait for frontend (port 3004)
+            # Wait for frontend (port 3011)
             for i in {1..20}; do
-              if curl -s -f http://localhost:3004 > /dev/null 2>&1; then
+              if curl -s -f http://localhost:3011 > /dev/null 2>&1; then
                 echo "✅ Frontend is ready!"
                 break
               fi

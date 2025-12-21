@@ -6,7 +6,7 @@ services:
     container_name: amenshi_backend
     restart: always
     ports:
-      - "3002:3002"
+      - "3010:3002"
     networks:
       - amenshi_network
     volumes:
@@ -33,7 +33,7 @@ services:
     container_name: amenshi_frontend
     restart: always
     ports:
-      - "3004:80"
+      - "3011:80"
     environment:
       - VITE_API_URL=https://amenshi4lifebackend.livingii.com/api
       - VITE_SITE_URL=https://amenshi4life.livingii.com
