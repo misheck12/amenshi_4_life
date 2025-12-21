@@ -5,7 +5,10 @@ services:
     image: ghcr.io/misheck12/amenshi_4_life/backend:About-us
     container_name: amenshi_backend
     restart: always
-    network_mode: "host"
+    ports:
+      - "3002:3002"
+    networks:
+      - amenshi_network
     volumes:
       - ./uploads:/app/uploads
       - ./logs:/app/logs
