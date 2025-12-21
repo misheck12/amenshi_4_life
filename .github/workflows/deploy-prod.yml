@@ -55,6 +55,8 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/frontend:About-us
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/frontend:latest
+          build-args: |
+            CACHEBUST=${{ github.run_id }}-${{ github.run_number }}
 
   deploy:
     needs: build-and-push

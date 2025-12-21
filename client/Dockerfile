@@ -14,8 +14,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Cache bust argument - passed from workflow
+ARG CACHEBUST=1
+
 # Build application
-RUN npm run build
+RUN echo "Cache bust: $CACHEBUST" && npm run build
 
 # Production stage
 FROM nginx:alpine
