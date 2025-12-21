@@ -136,6 +136,14 @@ jobs:
             sudo fuser -k 3002/tcp || true
             sudo fuser -k 3003/tcp || true
             
+            # Prune all stopped containers and unused networks
+            docker container prune -f || true
+            docker network prune -f || true
+            
+            # Restart Docker daemon to clear stale port allocations
+            sudo systemctl restart docker
+            sleep 5
+            
             # Clean up any other orphaned containers
             docker ps -a --filter "name=amenshi" --format "{{.ID}}" | xargs -r docker rm -f || true
             
