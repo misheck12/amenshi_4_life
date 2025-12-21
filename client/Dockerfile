@@ -17,8 +17,12 @@ COPY . .
 # Cache bust argument - passed from workflow
 ARG CACHEBUST=1
 
+# Environment variables for build
+ARG VITE_API_URL=https://amenshi4lifebackend.livingii.com/api
+ENV VITE_API_URL=$VITE_API_URL
+
 # Build application
-RUN echo "Cache bust: $CACHEBUST" && npm run build
+RUN echo "Cache bust: $CACHEBUST, API: $VITE_API_URL" && npm run build
 
 # Production stage
 FROM nginx:alpine

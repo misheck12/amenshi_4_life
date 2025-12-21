@@ -158,6 +158,11 @@ export const apiService = {
     updateStatus: (id, status) => api.put(`/volunteers/${id}`, { status }),
     delete: (id) => api.delete(`/volunteers/${id}`),
   },
+
+  // File upload
+  upload: (formData) => api.post('/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
 };
 
 export default api;

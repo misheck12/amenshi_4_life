@@ -1,6 +1,6 @@
 // Environment configuration
 export const config = {
-  apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  apiUrl: import.meta.env.VITE_API_URL || 'https://amenshi4lifebackend.livingii.com/api',
   donationUrl: import.meta.env.VITE_DONATION_URL || 'https://app.clovergive.com/App/Giving/talm10e206',
   siteName: 'Amenshi 4 Life',
   contactEmail: 'A4L@gmail.com',
