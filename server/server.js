@@ -76,8 +76,16 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health check
+// Health check (both root and API path for compatibility)
 app.get('/health', (req, res) => {
+  res.json({
+    success: true,
+    status: 'UP',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/api/health', (req, res) => {
   res.json({
     success: true,
     status: 'UP',
