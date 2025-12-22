@@ -54,13 +54,7 @@ const AboutContentManager = () => {
             const uploadFormData = new FormData();
             uploadFormData.append('image', file);
 
-            const token = localStorage.getItem('token');
-            const response = await axios.post('${import.meta.env.VITE_API_URL || 'https://amenshi4lifebackend.livingii.com/api'}/upload', uploadFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            const response = await apiService.upload(uploadFormData);
 
             const imageUrl = response.data.data.path;
 
