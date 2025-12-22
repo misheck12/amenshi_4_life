@@ -1,21 +1,51 @@
 # Production Backend-Frontend Communication Fix
 
-## Issues Identified
+## 🎯 Quick Fix (TL;DR)
 
-### 1. ❌ CORS Configuration (CRITICAL)
+```bash
+# SSH to production server
+cd ~/amenshi-app
+
+# Update CLIENT_URL in server/.env
+sed -i 's|CLIENT_URL=.*|CLIENT_URL=https://amenshi4life.livingii.com|' server/.env
+
+# Rebuild and restart backend
+docker-compose -f docker-compose.prod.yml build backend
+docker-compose -f docker-compose.prod.yml up -d backend
+
+# Verify
+bash scripts/verify-production.sh
+```
+
+## Issues Identified & Fixed
+
+### 1. ❌ CORS Configuration (CRITICAL) - ✅ FIXED
 **Problem**: Backend `.env` file has `CLIENT_URL=http://localhost:5173` (development URL)
 **Impact**: Backend rejects all requests from production frontend domain
-**Status**: ✅ FIXED
+**Solution**: Updated to `CLIENT_URL=https://amenshi4life.livingii.com`
 
-### 2. ❌ Health Check Endpoint Mismatch
+### 2. ❌ Health Check Endpoint Mismatch - ✅ FIXED
 **Problem**: Nginx expects `/api/health` but backend only has `/health`
 **Impact**: Health checks fail, containers may be marked unhealthy
-**Status**: ✅ FIXED
+**Solution**: Added both `/health` and `/api/health` endpoints
 
-### 3. ✅ Port Configuration (Already Correct)
+### 3. ⚠️ Missing Images (Non-Critical)
+**Problem**: Images in `client/public/images/` are SVG placeholders, not real images
+**Impact**: 404 errors for fallback images (hero-bg.jpg, about-us.jpg, mission.jpg)
+**Solution**: Replace placeholder SVGs with actual images or use dynamic content from CMS
+
+### 4. ✅ Port Configuration (Already Correct)
 - Backend container: Port 3002 → 3010 (host)
 - Nginx proxies: localhost:3010 → amenshi4lifebackend.livingii.com
 - Frontend calls: https://amenshi4lifebackend.livingii.com/api
+
+## Architecture Overview
+
+```
+Internet → Nginx (443) → Frontend Container (3011:80) → React App
+                      ↓
+                      → Backend Container (3010:3002) → Express API → MongoDB
+```
 
 ## Deployment Steps
 
