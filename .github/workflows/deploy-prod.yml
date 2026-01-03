@@ -175,9 +175,9 @@ jobs:
               sleep 3
             done
             
-            # Wait for frontend (port 8080)
+            # Wait for frontend (port 3080)
             for i in {1..20}; do
-              if curl -s -f http://localhost:8080 > /dev/null 2>&1; then
+              if curl -s -f http://localhost:3080 > /dev/null 2>&1; then
                 echo "✅ Frontend is ready!"
                 break
               fi

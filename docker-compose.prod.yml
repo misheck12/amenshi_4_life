@@ -33,7 +33,7 @@ services:
     container_name: amenshi_frontend
     restart: always
     ports:
-      - "8080:80"  # Changed from 80:80 to avoid conflict with system nginx
+      - "3080:80"  # Changed from 8080 to 3080 to avoid conflict
     environment:
       - VITE_API_URL=https://sync.livingii.com/api
       - VITE_SITE_URL=https://sync.livingii.com
