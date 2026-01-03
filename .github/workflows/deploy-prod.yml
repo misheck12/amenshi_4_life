@@ -117,7 +117,7 @@ jobs:
             DONATION_URL=https://app.clovergive.com/App/Giving/talm10e206
             
             NODE_ENV=production
-            PORT=3002
+            PORT=3005
             EOF
             chmod 600 .env
             

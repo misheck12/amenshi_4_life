@@ -35,7 +35,7 @@ bash scripts/verify-production.sh
 **Solution**: Replace placeholder SVGs with actual images or use dynamic content from CMS
 
 ### 4. ✅ Port Configuration (Already Correct)
-- Backend container: Port 3002 → 3010 (host)
+- Backend container: Port 3005 → 3010 (host)
 - Nginx proxies: localhost:3010 → amenshi4lifebackend.livingii.com
 - Frontend calls: https://amenshi4lifebackend.livingii.com/api
 
@@ -44,7 +44,7 @@ bash scripts/verify-production.sh
 ```
 Internet → Nginx (443) → Frontend Container (3011:80) → React App
                       ↓
-                      → Backend Container (3010:3002) → Express API → MongoDB
+                      → Backend Container (3010:3005) → Express API → MongoDB
 ```
 
 ## Deployment Steps
