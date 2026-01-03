@@ -127,6 +127,9 @@ jobs:
             # 🧹 COMPREHENSIVE CLEANUP PROCESS
             echo "🧹 Starting comprehensive cleanup..."
             
+            # Temporarily stop system nginx to free port 80
+            sudo systemctl stop nginx 2>/dev/null || true
+            
             # Stop all amenshi and sync containers (both naming conventions)
             docker stop amenshi_backend amenshi_frontend sync_backend sync_frontend 2>/dev/null || true
             docker rm amenshi_backend amenshi_frontend sync_backend sync_frontend 2>/dev/null || true
@@ -172,9 +175,9 @@ jobs:
               sleep 3
             done
             
-            # Wait for frontend (port 80)
+            # Wait for frontend (port 8080)
             for i in {1..20}; do
-              if curl -s -f http://localhost:80 > /dev/null 2>&1; then
+              if curl -s -f http://localhost:8080 > /dev/null 2>&1; then
                 echo "✅ Frontend is ready!"
                 break
               fi
