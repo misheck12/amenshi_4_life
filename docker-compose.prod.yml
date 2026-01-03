@@ -3,10 +3,10 @@ version: '3.8'
 services:
   backend:
     image: ghcr.io/misheck12/amenshi_4_life/backend:About-us
-    container_name: sync_backend
+    container_name: amenshi_backend
     restart: always
     ports:
-      - "3002:3002"
+      - "3005:3005"
     networks:
       - amenshi_network
     volumes:
@@ -16,9 +16,9 @@ services:
       - .env
     environment:
       - NODE_ENV=production
-      - PORT=3002
+      - PORT=3005
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3002/health', (r) => {if(r.statusCode!==200)throw new Error()})"]
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3005/health', (r) => {if(r.statusCode!==200)throw new Error()})"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -30,7 +30,7 @@ services:
 
   frontend:
     image: ghcr.io/misheck12/amenshi_4_life/frontend:About-us
-    container_name: sync_frontend
+    container_name: amenshi_frontend
     restart: always
     ports:
       - "80:80"
