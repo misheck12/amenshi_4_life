@@ -3,10 +3,10 @@ version: '3.8'
 services:
   backend:
     image: ghcr.io/misheck12/amenshi_4_life/backend:About-us
-    container_name: amenshi_backend
+    container_name: sync_backend
     restart: always
     ports:
-      - "3010:3005"
+      - "3002:3002"
     networks:
       - amenshi_network
     volumes:
@@ -16,9 +16,9 @@ services:
       - .env
     environment:
       - NODE_ENV=production
-      - PORT=3005
+      - PORT=3002
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3005/health', (r) => {if(r.statusCode!==200)throw new Error()})"]
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3002/health', (r) => {if(r.statusCode!==200)throw new Error()})"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -30,13 +30,13 @@ services:
 
   frontend:
     image: ghcr.io/misheck12/amenshi_4_life/frontend:About-us
-    container_name: amenshi_frontend
+    container_name: sync_frontend
     restart: always
     ports:
-      - "3011:80"
+      - "80:80"
     environment:
-      - VITE_API_URL=https://amenshi4lifebackend.livingii.com/api
-      - VITE_SITE_URL=https://amenshi4life.livingii.com
+      - VITE_API_URL=https://sync.livingii.com/api
+      - VITE_SITE_URL=https://sync.livingii.com
       - VITE_DONATION_URL=https://app.clovergive.com/App/Giving/talm10e206
     depends_on:
       - backend
@@ -55,4 +55,5 @@ services:
 
 networks:
   amenshi_network:
+    name: sync_network
     driver: bridge

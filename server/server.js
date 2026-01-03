@@ -11,6 +11,9 @@ connectDB();
 
 const app = express();
 
+// Trust proxy - required for rate limiting behind nginx
+app.set('trust proxy', true);
+
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
