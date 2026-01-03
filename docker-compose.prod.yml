@@ -1,58 +1,71 @@
+# Amenshi 4 Life - Production Docker Compose Configuration
+# This file defines the production deployment setup for the Amenshi 4 Life application
+# It includes both backend (Node.js/Express API) and frontend (React/Vite) services
+
 version: '3.8'
 
 services:
+  # Backend Service - Node.js Express API
   backend:
     image: ghcr.io/misheck12/amenshi_4_life/backend:About-us
     container_name: amenshi_backend
-    restart: always
+    restart: always # Always restart on failure for production reliability
     ports:
-      - "3005:3005"
+      - "3005:3005" # Expose backend API on port 3005
     networks:
       - amenshi_network
     volumes:
+      # Persistent storage for uploaded files and application logs
       - ./uploads:/app/uploads
       - ./logs:/app/logs
     env_file:
-      - .env
+      - .env # Load environment variables from .env file
     environment:
       - NODE_ENV=production
       - PORT=3005
+    # Health check to ensure backend is responding
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3005/health', (r) => {if(r.statusCode!==200)throw new Error()})"]
       interval: 30s
       timeout: 10s
       retries: 3
+    # Log rotation to prevent disk space issues
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
 
+  # Frontend Service - React/Vite application served by Nginx
   frontend:
     image: ghcr.io/misheck12/amenshi_4_life/frontend:About-us
     container_name: amenshi_frontend
-    restart: always
+    restart: always # Always restart on failure for production reliability
     ports:
-      - "3080:80"  # Changed from 8080 to 3080 to avoid conflict
+      - "80:80" # Expose frontend on standard HTTP port
     environment:
+      # Frontend environment variables for API endpoints
       - VITE_API_URL=https://sync.livingii.com/api
       - VITE_SITE_URL=https://sync.livingii.com
       - VITE_DONATION_URL=https://app.clovergive.com/App/Giving/talm10e206
     depends_on:
-      - backend
+      - backend # Ensure backend starts before frontend
     networks:
       - amenshi_network
+    # Health check to ensure frontend is serving content
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
       interval: 30s
       timeout: 10s
       retries: 3
+    # Log rotation to prevent disk space issues
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
 
+# Custom network for service communication
 networks:
   amenshi_network:
     name: sync_network
