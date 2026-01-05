@@ -23,6 +23,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3005
+      - BASE_URL=https://amenshi4lifebackend.livingii.com
     # Health check to ensure backend is responding
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3005/health', (r) => {if(r.statusCode!==200)throw new Error()})"]
