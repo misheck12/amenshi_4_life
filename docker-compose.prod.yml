@@ -42,7 +42,7 @@ services:
     container_name: amenshi_frontend
     restart: always # Always restart on failure for production reliability
     ports:
-      - "80:80" # Expose frontend on standard HTTP port
+      - "3080:80" # Expose frontend on port 3080 (behind system nginx)
     environment:
       # Frontend environment variables for API endpoints
       - VITE_API_URL=https://sync.livingii.com/api

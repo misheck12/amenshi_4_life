@@ -209,8 +209,8 @@ jobs:
               exit 1
             }
             
-            # Reload nginx
-            sudo systemctl reload nginx
+            # Reload or restart nginx
+            sudo systemctl reload nginx || sudo systemctl restart nginx
             
             # Show deployment status
             echo "📊 Deployment Status:"
